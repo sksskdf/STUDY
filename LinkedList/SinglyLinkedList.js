@@ -87,14 +87,33 @@ class SinglyLinkedList {
     return this.tail;
   }
 
+  //reverses the order of the elements in the linked list
+  reverse() {
+    let current = this.head
+    let prev = null;
+    let next = null;
+
+    while (current) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next;
+    }
+
+    this.tail = this.head;
+    this.head = prev;
+  }
 }
 
 const sll = new SinglyLinkedList();
 sll.add(1);
 sll.add(2);
+sll.add(4);
+sll.add(5);
 sll.add(3);
-sll.remove(3);
-console.log(sll.get(2));
-console.log(sll.isEmpty());
-console.log(sll.size());
-
+// sll.remove(3);
+// console.log(sll.get(2));
+// console.log(sll.isEmpty());
+// console.log(sll.size());
+sll.reverse();
+sll.print();
