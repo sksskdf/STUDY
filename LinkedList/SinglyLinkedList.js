@@ -89,7 +89,7 @@ class SinglyLinkedList {
 
   //reverses the order of the elements in the linked list
   reverse() {
-    let current = this.head
+    let current = this.head;
     let prev = null;
     let next = null;
 
@@ -103,17 +103,82 @@ class SinglyLinkedList {
     this.tail = this.head;
     this.head = prev;
   }
+
+  //searches the linked list for a specific element and returns its index
+  find(index) {
+    let result;
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      result = current.next;
+    }
+
+    return result;
+  }
+
+  //inserts a node at a specific index in the linked list
+  insertAt(value, index) {
+    const newNode = new Node(value);
+    let current = this.head;
+    let currentIndex = 0;
+    while (current.next && currentIndex < index - 1) {
+      current = current.next;
+      currentIndex++;
+    }
+
+    if (currentIndex === index - 1) {
+      newNode.next = current.next;
+      current.next = newNode;
+
+      if (!newNode.next) {
+        this.tail = newNode;
+      }
+    }
+
+    this.length++;
+  }
+
+  //removes a node from a specific index in the linked list
+  removeAt(index) {
+    if (index < 0 || !this.head) {
+      return;
+    }
+
+    if (index === 0) {
+      this.head = this.head.next;
+      if (!this.head) {
+        this.tail = null;
+      }
+      return;
+    }
+
+    let current = this.head;
+    let currentIndex = 0;
+    while (current.next && currentIndex < index - 1) {
+      current = current.next;
+      currentIndex++;
+    }
+
+    if (currentIndex === index - 1 && current.next) {
+      current.next = current.next.next;
+      if (!current.next) {
+        this.tail = current;
+      }
+    }
+  }
 }
 
 const sll = new SinglyLinkedList();
 sll.add(1);
-sll.add(2);
+sll.add(3);
 sll.add(4);
 sll.add(5);
-sll.add(3);
 // sll.remove(3);
 // console.log(sll.get(2));
 // console.log(sll.isEmpty());
 // console.log(sll.size());
-sll.reverse();
+// sll.reverse();
+// sll.print();
+// console.log(sll.find(2));
+sll.insertAt(2, 1);
+sll.removeAt(1);
 sll.print();
