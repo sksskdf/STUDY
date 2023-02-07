@@ -24,12 +24,14 @@ class HashTable {
 
   get(key) {
     let index = this._hash(key);
+    let resultList = [];
     if (this.keyMap[index]) {
       for (let i = 0; i < this.keyMap[index].length; i++) {
         if (this.keyMap[index][i][0] === key) {
-          return this.keyMap[index][i][1];
+          resultList.push(this.keyMap[index][i][1]);
         }
       }
+      return resultList;
     }
     return undefined;
   }
@@ -61,9 +63,6 @@ class HashTable {
 
 let ht = new HashTable();
 ht.set("a", "1");
-ht.set("b", "2");
-ht.set("c", "3");
 ht.set("a", "4");
 let v = ht.get("a");
 console.log(v);
-console.log(ht.values());
