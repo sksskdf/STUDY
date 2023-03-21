@@ -8,9 +8,13 @@ class Graph {
     this.adjList.set(v, []);
   }
 
-  addEdge(v, w) {
+  addUndirectedEdge(v, w) {
     this.adjList.get(v).push(w);
     this.adjList.get(w).push(v);
+  }
+
+  addDirectedEdge(v, w) {
+    this.adjList.get(v).push(w);
   }
 
   printGraph() {
@@ -32,8 +36,8 @@ const vertices = [1, 2, 3, 4, 5];
 
 vertices.forEach((e) => g.addVertex(e));
 
-g.addEdge(1, 2);
-g.addEdge(1, 4);
-g.addEdge(3, 5);
+g.addUndirectedEdge(1, 2);
+g.addUndirectedEdge(1, 4);
+g.addUndirectedEdge(3, 5);
 
 g.printGraph();

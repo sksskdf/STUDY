@@ -6,9 +6,13 @@ class Graph {
       .map(() => Array(vertices).fill(0));
   }
 
-  addEdge(v, w) {
+  addUndirectedEdge(v, w) {
     this.adjMatrix[v][w] = 1;
     this.adjMatrix[w][v] = 1;
+  }
+
+  addDirectedEdge(v, w) {
+    this.adjMatrix[v][w] = 1;
   }
 
   printGraph() {
@@ -20,8 +24,8 @@ class Graph {
 
 let g = new Graph(5);
 
-g.addEdge(0, 1);
-g.addEdge(0, 2);
-g.addEdge(3, 4);
+g.addUndirectedEdge(0, 1);
+g.addUndirectedEdge(0, 2);
+g.addUndirectedEdge(3, 4);
 
 g.printGraph();
