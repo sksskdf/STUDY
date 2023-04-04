@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="inorder">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Common Algorithm/Tree Traversal/Depth First Search/InOrder Traversal/inorder.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
