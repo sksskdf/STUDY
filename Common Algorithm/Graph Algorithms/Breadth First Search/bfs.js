@@ -1,54 +1,46 @@
 class Graph {
-  constructor() {
-    this.vertices = [];
-    this.adjList = new Map();
-  }
-
-  addVertex(v) {
-    this.vertices.push(v);
-    this.adjList.set(v, []);
+  constructor(v) {
+    this.V = v;
+    this.adj = new Array(v);
+    for (let i = 0; i < v; i++) this.adj[i] = [];
   }
 
   addEdge(v, w) {
-    this.adjList.get(v).push(w);
-    this.adjList.get(w).push(v);
+    this.adj[v].push(w);
   }
 
-  bfs(startingNode) {
-    let visited = {};
+  BFS(s) {
+    let visited = new Array(this.V);
+    visited.fill(false);
+
     let queue = [];
 
-    visited[startingNode] = true;
-    queue.push(startingNode);
+    visited[s] = true;
+    queue.push(s);
 
-    while (queue.length !== 0) {
-      let currentVertex = queue.shift();
-      let neighbors = this.adjList.get(currentVertex);
+    while (queue.length > 0) {
+      s = queue[0];
+      console.log(s + " ");
+      queue.shift();
 
-      for (let neighbor of neighbors) {
-        if (!visited[neighbor]) {
-          visited[neighbor] = true;
-          queue.push(neighbor);
+      this.adj[s].forEach((adjacent, i) => {
+        if (!visited[adjacent]) {
+          visited[adjacent] = true;
+          queue.push(adjacent);
         }
-      }
+      });
     }
-
-    return this.vertices.filter(v => visited[v]);
   }
 }
 
-const g = new Graph();
-
-g.addVertex(1);
-g.addVertex(2);
-g.addVertex(3);
-g.addVertex(4);
-g.addVertex(5);
-g.addVertex(6);
-
-g.addEdge(1, 3);
-g.addEdge(2, 4);
+g = new Graph(8);
+g.addEdge(0, 1);
+g.addEdge(0, 3);
+g.addEdge(0, 4);
+g.addEdge(3, 2);
 g.addEdge(2, 5);
-g.addEdge(3, 6);
+g.addEdge(2, 7);
+g.addEdge(7, 6);
+g.addEdge(6, 1);
 
-console.log(g.bfs(1));
+g.BFS(0);
