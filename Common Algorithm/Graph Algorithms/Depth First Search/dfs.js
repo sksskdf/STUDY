@@ -1,29 +1,27 @@
 class Graph {
   constructor(v) {
-    this.V = v;
     this.adj = new Array(v);
     for (let i = 0; i < v; i++) this.adj[i] = [];
+    // this.adj.fill([]);
+    this.visited = new Array(v);
+    this.visited.fill(false);
   }
 
   addEdge(v, w) {
     this.adj[v].push(w);
   }
 
-  DFSUtil(v, visited) {
-    visited[v] = true;
-    console.log(v + " ");
+  DFSUtil(root) {
+    this.visited[root] = true;
+    console.log(root, " ");
 
-    for (let i of this.adj[v].values()) {
-      let n = i;
-      if (!visited[n]) this.DFSUtil(n, visited);
+    for (let adjElem of this.adj[root]) {
+      if (!this.visited[adjElem]) this.DFSUtil(adjElem, this.visited);
     }
   }
 
-  DFS(v) {
-    let visited = new Array(this.V);
-    for (let i = 0; i < this.V; i++) visited[i] = false;
-
-    this.DFSUtil(v, visited);
+  DFS(root) {
+    this.DFSUtil(root);
   }
 }
 

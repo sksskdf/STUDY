@@ -2,7 +2,8 @@ class Graph {
   constructor(v) {
     this.V = v;
     this.adj = new Array(v);
-    for (let i = 0; i < v; i++) this.adj[i] = [];
+    this.adj.fill([]);
+    // for (let i = 0; i < v; i++) this.adj[i] = [];
   }
 
   addEdge(v, w) {
