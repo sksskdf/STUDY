@@ -2,7 +2,8 @@ class Graph {
   constructor(v) {
     this.V = v;
     this.adj = new Array(v);
-    this.adj.fill([]);
+    this.adj = Array.from({ length: v }, () => []);
+    // this.adj.fill([]);
     // for (let i = 0; i < v; i++) this.adj[i] = [];
   }
 
@@ -24,7 +25,7 @@ class Graph {
       console.log(s + " ");
       queue.shift();
 
-      this.adj[s].forEach((adjacent, i) => {
+      this.adj[s].forEach(adjacent => {
         if (!visited[adjacent]) {
           visited[adjacent] = true;
           queue.push(adjacent);

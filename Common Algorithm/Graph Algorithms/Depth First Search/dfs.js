@@ -1,8 +1,8 @@
 class Graph {
   constructor(v) {
     this.adj = new Array(v);
-    for (let i = 0; i < v; i++) this.adj[i] = [];
-    // this.adj.fill([]);
+    // for (let i = 0; i < v; i++) this.adj[i] = [];
+    this.adj = Array.from({ length: v }, () => []);
     this.visited = new Array(v);
     this.visited.fill(false);
   }
@@ -13,10 +13,10 @@ class Graph {
 
   DFSUtil(root) {
     this.visited[root] = true;
-    console.log(root, " ");
+    console.log(root);
 
     for (let adjElem of this.adj[root]) {
-      if (!this.visited[adjElem]) this.DFSUtil(adjElem, this.visited);
+      if (!this.visited[adjElem]) this.DFSUtil(adjElem);
     }
   }
 
