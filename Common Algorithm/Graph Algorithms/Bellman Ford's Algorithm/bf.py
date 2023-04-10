@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 class Graph:
     def __init__(self, numVertices):
         self.graph = []
@@ -24,10 +22,6 @@ class Graph:
             
         return dist
         
-
-
-
-
 
 g = Graph(5)
 g.addEdge(0, 1, -1)
