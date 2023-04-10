@@ -34,4 +34,3 @@ g.addEdge(3, 1, 1)
 g.addEdge(4, 3, -3)
 
 print(g.bellmanFord(0))
-#print(g.bellmanFord(0))
