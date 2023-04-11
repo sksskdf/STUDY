@@ -72,11 +72,10 @@ function dijkstra(graph, start) {
 }
 
 const graph = {
-  A: { B: 4, C: 2 },
-  B: { D: 2, E: 3, C: 3 },
-  C: { B: 1, D: 4, E: 5 },
+  A: { B: 10 },
+  B: { C: 100, D: 12 },
+  C: { D: -200 },
   D: {},
-  E: { D: 1 },
 };
 
 const startNode = "A";
