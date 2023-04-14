@@ -88,4 +88,4 @@ console.log("compressed string:", compressedStr);
 let huffmanTree = buildHuffmanTree(countFrequencies(originalStr));
 let decompressedStr = decompress(compressedStr, huffmanTree);
 
-console.log("decompressed string:", decompressedStr);
+console.log("decompressed string:", decompressedStr); 

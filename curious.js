@@ -1,16 +1,48 @@
-const some_object = {
-  some_property: {
-    value: 0,
-    next : null
-  },
-  some_property2: "hello",
-};
+function solution(plans) {
+  const queue = plans
+    .map((plan) => {
+      const [name, time, spend] = plan;
+      const [hour, minute] = time.split(":");
+      const convertedTime = Number(hour) * 60 + Number(minute);
 
-let some_property_ref = some_object.some_property;
+      return [name, convertedTime, Number(spend)];
+    })
+    .sort((a, b) => a[1] - b[1]);
 
-console.log(some_property_ref);
+  const result = [];
+  const first = queue.shift();
+  let curTime = first[1];
 
-some_property_ref.next = 1;
+  const stack = [first];
 
-console.log(some_property_ref);
-console.log(some_object.some_property);
+  while (queue.length) {
+    const target = queue.shift();
+    const [_name, time, _spend] = target;
+    let timeDiff = time - curTime;
+    curTime = time;
+
+    while (stack.length && timeDiff > 0) {
+      const latestPlan = stack.pop();
+      const [lName, _lTime, lSpend] = latestPlan;
+
+      if (lSpend <= timeDiff) {
+        result.push(lName);
+        timeDiff -= lSpend;
+      } else {
+        latestPlan[2] = lSpend - timeDiff;
+        timeDiff = 0;
+        stack.push(latestPlan);
+      }
+    }
+
+    stack.push(target);
+  }
+
+  while (stack.length) {
+    result.push(stack.pop()[0]);
+  }
+
+  return result;
+}
+
+console.log(solution([["science", "12:40", "50"], ["music", "12:20", "40"], ["history", "14:00", "30"], ["computer", "12:30", "100"]]));
