@@ -1,12 +1,12 @@
 class Graph {
-  constructor(vertices) {
-    this.V = vertices;
-    this.adj = new Array(vertices).fill(null).map(() => []);
+  constructor(v) {
+    this.V = v;
+    this.adj = new Array(v).fill().map(() => []);
   }
 
   addEdge(v, w, weight) {
-    //undirected graph
     this.adj[v].push({ to: w, weight });
+    this.adj[w].push({ to: v, weight });
   }
 }
 
@@ -22,33 +22,34 @@ class DisjointSet {
   }
 
   find(x) {
-    if (this.parent[x] !== x) {
+    if (x !== this.parent[x]) {
       this.parent[x] = this.find(this.parent[x]);
     }
+
     return this.parent[x];
   }
 
   union(x, y) {
-    const px = this.find(x);
-    const py = this.find(y);
+    const px = this.parent[x];
+    const py = this.parent[y];
 
     if (this.rank[px] > this.rank[py]) {
-      this.parent[py] = px;
+      this.parent[py] = this.parent[px];
     } else if (this.rank[py] > this.rank[px]) {
-      this.parent[px] = py;
+      this.parent[px] = this.parent[py];
     } else {
-      this.parent[px] = py;
+      this.parent[px] = this.parent[py];
       this.rank[py]++;
     }
   }
 }
 
 function kruskal(graph) {
-  const edges = [];
+  let edges = [];
 
-  for (let v = 0; v < graph.V; v++) {
-    for (const edge of graph.adj[v]) {
-      edges.push([v, edge.to, edge.weight]);
+  for (let i = 0; i < graph.V; i++) {
+    for (let edge of graph.adj[i]) {
+      edges.push([i, edge.to, edge.weight]);
     }
   }
 
@@ -67,17 +68,13 @@ function kruskal(graph) {
   return result;
 }
 
-const graph = new Graph(6);
+const graph = new Graph(5);
 
-graph.addEdge(0, 1, 10);
-graph.addEdge(0, 2, 6);
-graph.addEdge(0, 3, 5);
-graph.addEdge(1, 3, 15);
-graph.addEdge(2, 3, 4);
-graph.addEdge(3, 4, 1);
-graph.addEdge(3, 5, 2);
-graph.addEdge(1, 2, 4);
+graph.addEdge(0, 1, 1);
+graph.addEdge(0, 2, 2);
+graph.addEdge(1, 2, 3);
+graph.addEdge(1, 3, 4);
+graph.addEdge(2, 4, 6);
+graph.addEdge(3, 4, 5);
 
-const result = kruskal(graph);
-
-console.log(result); // [ [ 3, 4, 1 ], [ 3, 5, 2 ], [ 2, 3, 4 ], [ 0, 3, 5 ], [ 0, 1, 10 ] ]
+console.log(kruskal(graph));
