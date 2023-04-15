@@ -1,62 +1,61 @@
-function maxFlow(graph, source, sink) {
-  let residual = [];
-  let max_flow = 0;
+function fordFulkerson(graph, source, sink) {
+  const n = graph.length;
+  const residual = new Array(n).fill(0).map(() => new Array(n).fill(0));
 
-  for (let i = 0; i < graph.length; i++) {
-    residual.push([]);
-    for (let j = 0; j < graph[i].length; j++) {
-      residual[i].push(graph[i][j]);
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      residual[i][j] = graph[i][j];
     }
   }
 
-  while (bfs(residual, source, sink)) {
-    let path_flow = Infinity;
-    let v = sink;
+  const parent = new Array(n).fill(-1);
+  let maxFlow = 0;
 
-    while (v != source) {
-      let u = parents[v];
-      path_flow = Math.min(path_flow, residual[u][v]);
-      v = u;
+  while (bfs(residual, source, sink, parent)) {
+    let pathFlow = Infinity;
+
+    for (let v = sink; v != source; v = parent[v]) {
+      const u = parent[v];
+      pathFlow = Math.min(pathFlow, residual[u][v]);
     }
 
-    v = sink;
-    while (v != source) {
-      let u = parents[v];
-      residual[u][v] -= path_flow;
-      residual[v][u] += path_flow;
-      v = u;
+    for (let v = sink; v != source; v = parent[v]) {
+      const u = parent[v];
+      residual[u][v] -= pathFlow;
+      residual[v][u] += pathFlow;
     }
 
-    max_flow += path_flow;
+    maxFlow += pathFlow;
   }
 
-  return max_flow;
+  return maxFlow;
 }
 
-function bfs(residual, source, sink) {
-  let visited = new Array(residual.length).fill(false);
-  let queue = [];
+function bfs(residual, source, sink, parent) {
+  const n = residual.length;
+  const visited = new Array(n).fill(false);
+  const queue = [];
 
-  queue.push(source);
   visited[source] = true;
-  parents[source] = -1;
+  queue.push(source);
 
   while (queue.length > 0) {
-    let u = queue.shift();
+    const u = queue.shift();
 
-    for (let v = 0; v < residual.length; v++) {
-      if (visited[v] == false && residual[u][v] > 0) {
-        queue.push(v);
-        parents[v] = u;
+    for (let v = 0; v < n; v++) {
+      if (!visited[v] && residual[u][v] > 0) {
         visited[v] = true;
+        parent[v] = u;
+        queue.push(v);
       }
     }
   }
 
-  return visited[sink] == true;
+  return visited[sink];
 }
 
-let graph = [
+// 클라이언트 코드
+const graph = [
   [0, 16, 13, 0, 0, 0],
   [0, 0, 10, 12, 0, 0],
   [0, 4, 0, 0, 14, 0],
@@ -65,7 +64,7 @@ let graph = [
   [0, 0, 0, 0, 0, 0],
 ];
 
-let source = 0;
-let sink = 5;
+const source = 0;
+const sink = 5;
 
-console.log(maxFlow(graph, source, sink)); // 출력: 23
+console.log(fordFulkerson(graph, source, sink)); // 출력: 23
