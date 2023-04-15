@@ -5,6 +5,7 @@ class Graph {
   }
 
   addEdge(v, w, weight) {
+    //undirected graph
     this.adj[v].push({ to: w, weight });
     this.adj[w].push({ to: v, weight });
   }
@@ -76,7 +77,8 @@ graph.addEdge(1, 3, 15);
 graph.addEdge(2, 3, 4);
 graph.addEdge(3, 4, 1);
 graph.addEdge(3, 5, 2);
+graph.addEdge(1, 2, 4);
 
 const result = kruskal(graph);
 
-console.log(result); // [ [ 2, 3, 4 ], [ 0, 3, 5 ], [ 0, 1, 10 ] ]
+console.log(result); // [ [ 3, 4, 1 ], [ 3, 5, 2 ], [ 2, 3, 4 ], [ 0, 3, 5 ], [ 0, 1, 10 ] ]
