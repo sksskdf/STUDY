@@ -21,15 +21,15 @@ const bruteForceStringSearch = (str, pattern) => {
   else return -1;
 };
 
-const str = "Hello Java Script, Java Script and Java are different";
-const pattern = "Java";
+const text = "ABABDABACDABABCABAB";
+const pattern = "ABABCABAB";
 
-const index = bruteForceStringSearch(str, pattern);
+const index = bruteForceStringSearch(text, pattern);
 
 if (index === -1) {
-  console.log(`The pattern "${pattern}" was not found in the string "${str}".`);
-} else {
   console.log(
-    `The pattern "${pattern}" was found at index ${index}".`
+    `The pattern "${pattern}" was not found in the string "${text}".`
   );
+} else {
+  console.log(`The pattern "${pattern}" was found at index ${index}".`);
 }
