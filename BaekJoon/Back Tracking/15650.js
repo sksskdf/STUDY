@@ -1,4 +1,4 @@
-const input = `3 2`.split(" ");
+const input = `4 4`.split(" ");
 const N = +input.shift();
 const M = +input.shift();
 
@@ -13,7 +13,7 @@ function dfs(idx, cnt) {
   }
 
   for (let i = idx; i < N; i++) {
-    if (visited[i] === true) continue;
+    if (visited[i]) continue;
     visited[i] = true;
     output.push(i + 1);
     dfs(i, cnt + 1);
