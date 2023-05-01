@@ -1,6 +1,14 @@
-// const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
-const input = `5 20
-4 42 40 26 46`.split("\n");
+// const input = `5 20
+// 4 42 40 26 46`
+//   .toString()
+//   .trim()
+//   .split("\n");
+const input = require("fs")
+  .readFileSync("/dev/stdin")
+  .toString()
+  .trim()
+  .split("\n");
+
 const [N, M] = input
   .shift()
   .split(" ")
@@ -10,27 +18,22 @@ const heights = input
   .split(" ")
   .map((e) => +e);
 
-let sum = heights.reduce((acc, height) => acc + height);
-let avg = Math.floor(sum / N);
+let min = 0;
+let max = heights.sort((a, b) => b - a)[0];
+let answer = 0;
 
-heights.sort((a, b) => b - a);
-let max = 0;
-while (true) {
-  let newSum = 0;
-  for (let i = 0; i < N; i++) {
-    if (heights[i] <= avg) break;
-    newSum += heights[i] - avg;
-  }
+while (min <= max) {
+  let mid = Math.floor((min + max) / 2);
+  let sum = heights
+    .filter((e) => e - mid > 0)
+    .map((e) => e - mid)
+    .reduce((acc, sum) => acc + sum);
 
-  if (newSum === M) break;
-
-  if (newSum > M) {
-    max = avg;
-    avg *= 2;
+  if (sum >= M) {
+    if (mid > answer) answer = mid;
+    min = mid + 1;
   } else {
-    avg = max + Math.floor(max / 2);
-    max--;
+    max = mid - 1;
   }
 }
-
-console.log(avg);
+console.log(max);
