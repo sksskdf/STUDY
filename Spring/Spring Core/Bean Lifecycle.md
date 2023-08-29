@@ -49,6 +49,7 @@
 - 어노테이션을 사용해서 커스텀화 하기
 빈의 초기화와 파괴 작업을 커스텀할 수 있는 가장 쉬운 방법은 
 @PostConstruct 와 @PreDestory 어노테이션을 사용하는 것 입니다.
+
 ```
 @Component
 class TechLibrary {
