@@ -85,6 +85,7 @@ Process finished with exit code 0
 
 컴포넌트가 아닌 @Bean을 사용해도 같은 결과를 얻을 수 있습니다.
 
+```
 @Configuration
 class Config {
 
@@ -110,12 +111,14 @@ class TechLibrary {
         System.out.println("The library has been cleaned: " + bookTitles);
     }
 }
+```
 
 @Bean에 init과 destroy를 명시하지 않고
 @PostConstruct와 @PreDestroy를 사용할수도 있습니다.
 
 - 인터페이스 사용해서 커스텀화하기
 
+```
 @Component
 class TechLibrary implements InitializingBean, DisposableBean {
     private final List<String> bookTitles = 
@@ -135,6 +138,7 @@ class TechLibrary implements InitializingBean, DisposableBean {
         System.out.println("The library has been cleaned: " + bookTitles);
     }
 }
+```
 
 - 빈을 위한 후처리기
 빈 생명주기를 커스텀화할 수 있는 방법들에 대해서 알아보았습니다.
@@ -148,6 +152,7 @@ BeanPostProcessor 인터페이스를 이용하여 빈을 초기화 할 수도 �
 1. BeanPostProcessor를 구현해야함
 2. postProcessBeforeInitialization이나 postProcessAfterInitialization 메서드를 오버라이드해야함
 
+```
 @Component
 class PostProcessor implements BeanPostProcessor {
 
@@ -171,6 +176,7 @@ class PostProcessor implements BeanPostProcessor {
                 .postProcessAfterInitialization(bean, beanName);
     }
 }
+```
 
 이 코드를 실행하면 빈들의 목록과 함께 빈들의 생명주기의 단계들이 출력됩니다.
 
