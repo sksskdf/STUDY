@@ -25,6 +25,7 @@
 - 예제의 템플릿
 범위의 개념을 배우기 위해서 간단한 예시를 만들어보자.
 
+```java
 @Configuration
 public class AppConfig {
 
@@ -53,19 +54,24 @@ public class AppRunner implements CommandLineRunner {
         System.out.println(counter2.get());
     }
 }
+```
 
 - 싱글톤 범위
 앞서 말했다시피 빈은 기본적으로 싱글톤 범위를 갖고, 이는 일반적인 어플리케이션에서
 유용하게 사용된다.
 범위는 @Scope를 사용해 설정해 줄수 있다.
 
+```java
 @Bean
 @Scope("singleton")
 public AtomicInteger createCounter() { /* ... */ }
+```
 
 상수를 사용할 수도 있다.
 
+```java
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+```
 
 위의 예제를 실행해보면 같은 값이 출력되는걸 확인할 수 있다.
 왜냐하면 빈은 싱글톤이고 counter1과 counter2가 같은 빈을 참조하기 때문이다.
@@ -76,13 +82,17 @@ public AtomicInteger createCounter() { /* ... */ }
 프로토타입을 사용할땐 주입될때마다 새로운 빈을 생성한다.
 프로토타입으로 빈을 생성하면 @Scope에 prototype을 명시해주어야 한다.
 
+```java
 @Bean
 @Scope("prototype")
 public AtomicInteger createCounter() { /* ... */ }
+```
 
 상수를 사용할수도 있다.
 
+```java
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+```
 
 프로타타입빈으로 위의 예제를 생성하면 출력은 다음과 같다.
 7
