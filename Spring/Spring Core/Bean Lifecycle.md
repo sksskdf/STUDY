@@ -49,7 +49,7 @@
 - 어노테이션을 사용해서 커스텀화 하기
 빈의 초기화와 파괴 작업을 커스텀할 수 있는 가장 쉬운 방법은 
 @PostConstruct 와 @PreDestory 어노테이션을 사용하는 것 입니다.
-
+```
 @Component
 class TechLibrary {
     private final List<String> bookTitles = 
@@ -69,6 +69,7 @@ class TechLibrary {
         System.out.println("The library has been cleaned: " + bookTitles);
     }
 }
+```
 
 이러한 컴포넌트를 포함한 어플리케이션이 구동되면
 스프링은 이런 어노테이션이 붙은 메서드를 한번만 호출할 것 입니다.
