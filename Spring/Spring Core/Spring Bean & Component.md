@@ -14,7 +14,7 @@
 
 다음은 사용하고자 하는 캐릭터셋이 정의된 빈을 포함하는 PasswordConfig 클래스입니다.
 
-```java
+```kotlin
 @Configuration
 class PasswordConfig {
     companion object {
@@ -34,7 +34,7 @@ class PasswordConfig {
 
 그 다음은 PasswordGenerator 클래스입니다.
 
-```java
+```kotlin
 @Component
 class PasswordGenerator(@Autowired private val alphabet: PasswordAlphabet) {
     companion object {
@@ -55,7 +55,7 @@ class PasswordGenerator(@Autowired private val alphabet: PasswordAlphabet) {
 
 그 다음은 표준입출력시스템을 이용하기 위한 클래스입니다.
 
-```java
+```kotlin
 @Component
 class Runner(private val generator: PasswordGenerator) : CommandLineRunner {
     override fun run(vararg args: String) {
