@@ -50,7 +50,7 @@
 빈의 초기화와 파괴 작업을 커스텀할 수 있는 가장 쉬운 방법은 
 @PostConstruct 와 @PreDestory 어노테이션을 사용하는 것 입니다.
 
-```
+```java
 @Component
 class TechLibrary {
     private final List<String> bookTitles = 
@@ -85,7 +85,7 @@ Process finished with exit code 0
 
 컴포넌트가 아닌 @Bean을 사용해도 같은 결과를 얻을 수 있습니다.
 
-```
+```java
 @Configuration
 class Config {
 
@@ -118,7 +118,7 @@ class TechLibrary {
 
 - 인터페이스 사용해서 커스텀화하기
 
-```
+```java
 @Component
 class TechLibrary implements InitializingBean, DisposableBean {
     private final List<String> bookTitles = 
@@ -152,7 +152,7 @@ BeanPostProcessor 인터페이스를 이용하여 빈을 초기화 할 수도 �
 1. BeanPostProcessor를 구현해야함
 2. postProcessBeforeInitialization이나 postProcessAfterInitialization 메서드를 오버라이드해야함
 
-```
+```java
 @Component
 class PostProcessor implements BeanPostProcessor {
 
