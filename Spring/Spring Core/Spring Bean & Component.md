@@ -14,6 +14,7 @@
 
 다음은 사용하고자 하는 캐릭터셋이 정의된 빈을 포함하는 PasswordConfig 클래스입니다.
 
+```java
 @Configuration
 class PasswordConfig {
     companion object {
@@ -29,9 +30,11 @@ class PasswordConfig {
 
     class PasswordAlphabet(val characters: String)
 }
+```
 
 그 다음은 PasswordGenerator 클래스입니다.
 
+```java
 @Component
 class PasswordGenerator(@Autowired private val alphabet: PasswordAlphabet) {
     companion object {
@@ -48,9 +51,11 @@ class PasswordGenerator(@Autowired private val alphabet: PasswordAlphabet) {
         return result.toString()
     }
 }
+```
 
 그 다음은 표준입출력시스템을 이용하기 위한 클래스입니다.
 
+```java
 @Component
 class Runner(private val generator: PasswordGenerator) : CommandLineRunner {
     override fun run(vararg args: String) {
@@ -58,6 +63,7 @@ class Runner(private val generator: PasswordGenerator) : CommandLineRunner {
         println("A long password: " + generator.generate(10))
     }
 }
+```
 
 어플리케이션을 시작하면 아래와 같은 결과를 얻을 수 있습니다.
 
